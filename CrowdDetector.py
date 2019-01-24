@@ -21,7 +21,7 @@ caffe.set_mode_gpu()
 
 
 
-mypath = '/patht/models/'
+mypath = '/path/models/'
 
 
 
