@@ -10,8 +10,8 @@ plt.rcParams['figure.figsize'] = (10, 10)
 
 
 caffe.set_mode_gpu() 
-net = caffe.Net( '/path/deploy.prototxt',
-                 '/path/model.caffemodel',
+net = caffe.Net( '/path/models/deploy.prototxt',
+                 '/path/models/crowd.caffemodel',
                caffe.TEST)
 
 
@@ -26,7 +26,7 @@ for img in linelist:
     img=img.strip()
     im = caffe.io.load_image(img)
     transformer = caffe.io.Transformer({'data': net.blobs['data'].data.shape})
-    #transformer.set_mean('data', np.load('/path/mean.npy').mean(1).mean(1))
+    transformer.set_mean('data', np.load('/path/models/mean.npy').mean(1).mean(1))
     transformer.set_transpose('data', (2,0,1))
     transformer.set_channel_swap('data', (2,1,0))
     transformer.set_raw_scale('data', 255.0)
